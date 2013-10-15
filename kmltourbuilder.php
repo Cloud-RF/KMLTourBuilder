@@ -1,8 +1,9 @@
 <?php
 /*
-KML tour builder 1.0 by Alex Farrant.
+KML tour builder 1.1 by Alex Farrant.
 Makes a KML file of points around a given location.
-Replay in Google earth to take a tour of the surrounding area...
+Replay in Google earth to take a tour of the surrounding 
+area and build up your disk cache for offline usage...
 */
 function numbers($str){
 $result = preg_replace("/[^0-9.-]/","", $str); 
@@ -20,10 +21,10 @@ $radius=numbers($_POST["rad"]); // km radius
 $range=numbers($_POST["alt"]); //1km from ground
 
 //VALIDATION
-if($lat >  60 || $lon > 60){
+if($lat >  60 || $lon > 180){
 die("Lat/Lon too high");
 }
-if($lat <  -60 || $lon < -60){
+if($lat <  -60 || $lon < -180){
 die("Lat/Lon too low");
 }
 if($radius > 200 || $radius <= 0){
@@ -97,7 +98,7 @@ header("Location: kmltours/$fname.kml");
 }//POST
 ?>
 <html>
-<form method="post" action="tourgen.php">
+<form method="post" action="kmltourbuilder.php">
 <table>
 <tr><td>Latitude<td><input type="text" size="6" name="lat"> Dec degs
 <tr><td>Longitude<td><input type="text" size="6" name="lon"> Dec degs
